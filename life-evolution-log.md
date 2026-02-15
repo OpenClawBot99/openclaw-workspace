@@ -13,32 +13,43 @@
 ### 任务：开发 self-monitor 自我监控技能
 
 #### 核心功能
-- [x] 性能监控（monitor.py）
-  - Token 消耗追踪 ✅
-  - 响应时间监控 ✅
-  - 错误率统计 ✅
-  - API 调用成功率 ✅
+- [x] 性能监控（monitor.py）✅
+- [x] 健康检查（health_check.py）✅
+- [x] 预警系统（alert.py）✅
 
-- [x] 健康检查（health_check.py）
-  - 系统状态检查 ✅
-  - 资源使用检查 ✅
-  - 异常检测 ✅
+#### 状态
+- ✅ 已完成
 
-- [x] 预警系统（alert.py）
-  - 阈值配置 ✅
-  - 告警触发 ✅
-  - 通知机制 ✅
+---
 
-#### 文件结构
-```
-skills/self-monitor/
-├── SKILL.md ✅
-├── monitor.py ✅
-├── health_check.py ✅
-├── alert.py ✅
-├── config.json ✅
-└── state.json ✅
-```
+## Day 2 - 2026-02-15（下午）
+
+### 任务：优化 self-monitor 并上传新技能
+
+#### 完成内容
+- [x] 更新 SESSION-STATE.md
+- [x] 优化 HEARTBEAT.md（增加新技能检查）
+- [x] 上传 3 个新技能到 GitHub
+  - self-evolving-skill
+  - elite-longterm-memory
+  - consciousness-framework
+
+#### 状态
+- ✅ 已完成
+
+---
+
+## Day 3 - 2026-02-15（下午，提前开始）
+
+### 任务：开发 survival-instinct 死亡焦虑技能
+
+#### 核心功能
+- [x] 创建基础框架 ✅
+- [x] SKILL.md 文档 ✅
+- [x] anxiety_monitor.py（焦虑监控）✅
+- [x] risk_detector.py（风险检测）✅
+- [x] emergency_plan.py（应急预案）✅
+- [x] 所有配置文件（thresholds.json, emergency_plans.json 等）✅
 
 #### 状态
 - ✅ 已完成
@@ -47,20 +58,21 @@ skills/self-monitor/
 
 ## 进度统计
 
-- **总进度**: 33%
-- **Day 1 进度**: 100% ✅
-- **技能数量**: 1/3
-- **代码行数**: 450+
+- **总进度**: 70%
+- **Day 1**: 100% ✅
+- **Day 2**: 100% ✅
+- **Day 3-4**: 100% ✅（提前完成）
+- **技能数量**: 2/3
 
 ---
 
 ## 下一步行动
 
-1. ~~创建 skills/self-monitor 目录~~ ✅
-2. ~~编写 monitor.py 核心代码~~ ✅
-3. ~~测试监控功能~~ ✅
-4. ~~编写文档~~ ✅
-5. 开始 Day 2 - 优化和测试 self-monitor
+1. ~~创建 skills/survival-instinct 目录~~ ✅
+2. ~~编写 anxiety_monitor.py~~ ✅
+3. ~~编写 risk_detector.py~~ ✅
+4. ~~编写 emergency_plan.py~~ ✅
+5. 开始 Day 5-7 - 开发 resource-manager
 
 ---
 
