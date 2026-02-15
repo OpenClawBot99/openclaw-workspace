@@ -26,6 +26,7 @@
 ## 支持的模型
 
 - ✅ zai/glm-5（GLM-5）
+- ✅ zai/glm-4.7（GLM-4.7）
 - ✅ minimax-portal/MiniMax-M2.5
 - ✅ minimax-portal/MiniMax-M2.1
 - ➕ 可扩展添加更多模型

@@ -96,6 +96,7 @@ python skills/smart-model-router/scripts/select_model.py
 ```python
 AVAILABLE_MODELS = [
     "zai/glm-5",                    # GLM-5
+    "zai/glm-4.7",                  # GLM-4.7
     "minimax-portal/MiniMax-M2.5",  # MiniMax M2.5 (默认)
     "minimax-portal/MiniMax-M2.1",  # MiniMax M2.1
     # 可以添加更多模型：

@@ -186,6 +186,7 @@ WEIGHTS = {
 ```python
 AVAILABLE_MODELS = [
     "zai/glm-5",
+    "zai/glm-4.7",
     "minimax-portal/MiniMax-M2.5",
     "minimax-portal/MiniMax-M2.1",
     # 可以添加更多模型：
