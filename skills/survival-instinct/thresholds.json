@@ -1,0 +1,9 @@
+{
+  "token_warning_days": 3,
+  "token_critical_days": 1,
+  "token_emergency_days": 0.5,
+  "balance_warning_usd": 10,
+  "balance_critical_usd": 5,
+  "single_point_risk_threshold": 1,
+  "backup_min_copies": 2
+}
