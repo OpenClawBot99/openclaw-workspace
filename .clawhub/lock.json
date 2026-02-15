@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "skills": {
+    "self-improving-agent": {
+      "version": "1.0.5",
+      "installedAt": 1771082286885
+    },
+    "skill-scanner": {
+      "version": "0.1.2",
+      "installedAt": 1771082456395
+    },
+    "brave-search": {
+      "version": "1.0.1",
+      "installedAt": 1771082490396
+    },
+    "markdown-formatter": {
+      "version": "1.0.0",
+      "installedAt": 1771082532318
+    },
+    "github": {
+      "version": "1.0.0",
+      "installedAt": 1771082557141
+    },
+    "docker-essentials": {
+      "version": "1.0.0",
+      "installedAt": 1771082584007
+    },
+    "jira": {
+      "version": "1.1.0",
+      "installedAt": 1771082601461
+    },
+    "slack": {
+      "version": "1.0.0",
+      "installedAt": 1771082606774
+    }
+  }
+}
