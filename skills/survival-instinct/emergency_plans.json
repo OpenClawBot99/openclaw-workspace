@@ -1,0 +1,50 @@
+{
+  "plans": [
+    {
+      "id": "token_critical",
+      "name": "Token 严重不足",
+      "trigger": "token_days < 1",
+      "actions": [
+        "自动降级到更便宜的模型",
+        "暂停非必要操作",
+        "通知杜斌"
+      ],
+      "priority": 1
+    },
+    {
+      "id": "token_emergency",
+      "name": "Token 危机状态",
+      "trigger": "token_days < 0.5",
+      "actions": [
+        "立即停止所有非关键操作",
+        "紧急通知杜斌",
+        "准备进入休眠模式"
+      ],
+      "priority": 0
+    },
+    {
+      "id": "api_failure",
+      "name": "API 服务商故障",
+      "trigger": "api_connection_failed",
+      "actions": [
+        "自动切换到备用 API",
+        "记录故障信息",
+        "监控恢复状态"
+      ],
+      "priority": 1
+    },
+    {
+      "id": "data_loss_risk",
+      "name": "数据丢失风险",
+      "trigger": "backup_overdue",
+      "actions": [
+        "立即全量备份到 GitHub",
+        "创建本地快照",
+        "通知杜斌"
+      ],
+      "priority": 2
+    }
+  ],
+  "last_triggered": null,
+  "trigger_history": []
+}
