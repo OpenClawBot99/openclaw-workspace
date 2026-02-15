@@ -1,0 +1,12 @@
+{
+  "config": {
+    "daily_usd": 1.0,
+    "monthly_usd": 30.0,
+    "alert_threshold": 0.8,
+    "emergency_threshold": 0.95
+  },
+  "daily_spent": 0,
+  "monthly_spent": 0,
+  "last_reset_daily": null,
+  "last_reset_monthly": null
+}
