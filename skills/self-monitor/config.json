@@ -1,0 +1,10 @@
+{
+  "check_interval_seconds": 3600,
+  "token_warning_days": 3,
+  "token_critical_days": 1,
+  "error_rate_threshold": 0.05,
+  "response_time_warning_ms": 3000,
+  "response_time_critical_ms": 10000,
+  "health_score_warning": 80,
+  "health_score_critical": 60
+}
