@@ -32,6 +32,38 @@
     "slack": {
       "version": "1.0.0",
       "installedAt": 1771082606774
+    },
+    "self-evolving-skill": {
+      "version": "1.0.2",
+      "installedAt": 1771129944116
+    },
+    "elite-longterm-memory": {
+      "version": "1.2.3",
+      "installedAt": 1771129947336
+    },
+    "consciousness-framework": {
+      "version": "1.0.0",
+      "installedAt": 1771129953379
+    },
+    "empirical-paper-analysis-skill": {
+      "version": "1.0.0",
+      "installedAt": 1771133273465
+    },
+    "arxiv-watcher": {
+      "version": "1.0.0",
+      "installedAt": 1771133295347
+    },
+    "agentic-paper-digest-skill": {
+      "version": "0.3.3",
+      "installedAt": 1771133298725
+    },
+    "academic-research-hub": {
+      "version": "0.1.0",
+      "installedAt": 1771133302198
+    },
+    "agentarxiv": {
+      "version": "1.0.9",
+      "installedAt": 1771133305438
     }
   }
 }

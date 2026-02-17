@@ -1,0 +1,33 @@
+{
+  "name": "tilelangascend-knowledge-base",
+  "description": "TileLangAscend 编程知识库",
+  "version": "1.0.0",
+  "created": "2026-02-15T16:50:00+08:00",
+  "updated": "2026-02-15T16:50:00+08:00",
+  "author": "Lisa",
+  "license": "MIT",
+  "keywords": [
+    "tilelang",
+    "ascend",
+    "knowledge-base",
+    "api",
+    "templates",
+    "ai-infra"
+  ],
+  "categories": [
+    {"id": "api-reference", "count": 0, "priority": "high"},
+    {"id": "best-practices", "count": 0, "priority": "high"},
+    {"id": "templates", "count": 0, "priority": "medium"},
+    {"id": "techniques", "count": 0, "priority": "medium"},
+    {"id": "examples", "count": 0, "priority": "low"},
+    {"id": "faq", "count": 0, "priority": "low"},
+    {"id": "plugins", "count": 0, "priority": "low"}
+  ],
+  "stats": {
+    "total_files": 0,
+    "total_directories": 7,
+    "completion_percentage": 0
+  },
+  "plugin_compatible": true,
+  "skill_migration_ready": true
+}

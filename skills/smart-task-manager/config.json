@@ -1,0 +1,32 @@
+{
+  "auto_save_interval_minutes": 30,
+  "max_checkpoint_history": 10,
+  "completed_task_retention_days": 3,
+  "memory_threshold_percent": 80,
+  "disk_threshold_percent": 90,
+  "task_priorities": {
+    "learning": 9,
+    "development": 8,
+    "documentation": 7,
+    "maintenance": 5
+  },
+  "recovery_strategy": "latest_unfinished",
+  "auto_task_discovery": {
+    "enabled": true,
+    "scan_workspace": true,
+    "check_learning_progress": true,
+    "align_with_ten_year_goal": true
+  },
+  "resource_management": {
+    "enabled": true,
+    "cleanup_interval_hours": 6,
+    "max_memory_usage_percent": 80,
+    "max_disk_usage_percent": 90
+  },
+  "self_evolution": {
+    "enabled": true,
+    "add_learning_tasks": true,
+    "add_development_tasks": true,
+    "add_documentation_tasks": true
+  }
+}

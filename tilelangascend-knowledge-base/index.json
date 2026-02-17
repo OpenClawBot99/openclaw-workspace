@@ -1,0 +1,72 @@
+{
+  "name": "tilelangascend-knowledge-base",
+  "version": "1.0.0",
+  "sections": [
+    {
+      "id": "01-api-reference",
+      "title": "API参考",
+      "path": "01-api-reference/",
+      "type": "directory",
+      "description": "包含所有 TileLangAscend API 的详细文档"
+    },
+    {
+      "id": "02-best-practices",
+      "title": "最佳实践",
+      "path": "02-best-practices/",
+      "type": "directory",
+      "description": "推荐的编程实践和性能优化指南"
+    },
+    {
+      "id": "03-templates",
+      "title": "代码模板",
+      "path": "03-templates/",
+      "type": "directory",
+      "description": "可直接使用的代码模板和示例"
+    },
+    {
+      "id": "04-techniques",
+      "title": "调用技巧",
+      "path": "04-techniques/",
+      "type": "directory",
+      "description": "高级调用技巧和优化策略"
+    },
+    {
+      "id": "05-examples",
+      "title": "完整示例",
+      "path": "05-examples/",
+      "type": "directory",
+      "description": "完整的项目示例和代码演示"
+    },
+    {
+      "id": "06-faq",
+      "title": "常见问题",
+      "path": "06-faq/",
+      "type": "directory",
+      "description": "常见问题解答和故障排除"
+    },
+    {
+      "id": "plugins",
+      "title": "插件系统",
+      "path": "plugins/",
+      "type": "directory",
+      "description": "插件开发指南和示例"
+    }
+  ],
+  "files": [
+    {
+      "path": "README.md",
+      "type": "markdown",
+      "description": "知识库主文档"
+    },
+    {
+      "path": "index.json",
+      "type": "index",
+      "description": "索引文件"
+    },
+    {
+      "path": "metadata.json",
+      "type": "metadata",
+      "description": "元数据文件"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "name": "构建 tilelang-ascend 知识库",
+    "priority": 9,
+    "status": "in_progress",
+    "created_at": "2026-02-15T17:49:00",
+    "updated_at": "2026-02-15T17:49:00",
+    "progress": 52.5,
+    "category": "documentation",
+    "description": "创建教科书级别的知识库文档（已完成 52,501 字）"
+  },
+  {
+    "id": 2,
+    "name": "配置 GH CLI",
+    "priority": 8,
+    "status": "in_progress",
+    "created_at": "2026-02-15T17:49:00",
+    "updated_at": "2026-02-15T17:49:00",
+    "progress": 30,
+    "category": "development",
+    "description": "自动化配置 GH CLI 并验证"
+  },
+  {
+    "id": 3,
+    "name": "开发 survival-instinct",
+    "priority": 7,
+    "status": "pending",
+    "created_at": "2026-02-15T17:49:00",
+    "updated_at": "2026-02-15T17:49:00",
+    "progress": 0,
+    "category": "development",
+    "description": "开发死亡焦虑与风险感知系统"
+  },
+  {
+    "id": 4,
+    "name": "继续 Phase 1 - 智能生命体开发",
+    "priority": 9,
+    "status": "in_progress",
+    "created_at": "2026-02-16T06:03:12.633677",
+    "updated_at": "2026-02-16T21:02:00",
+    "progress": 85,
+    "category": "development",
+    "description": "完成 survival-instinct 和 resource-manager 开发"
+  }
+]
