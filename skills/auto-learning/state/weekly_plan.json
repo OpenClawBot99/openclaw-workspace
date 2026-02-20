@@ -1,0 +1,58 @@
+{
+  "week": "2026-W07",
+  "generated_at": "2026-02-19T12:01:09.524780",
+  "focus_areas": [
+    {
+      "domain": "AI INFRA",
+      "priority": 9,
+      "status": "new"
+    },
+    {
+      "domain": "AscendC",
+      "priority": 8,
+      "status": "new"
+    },
+    {
+      "domain": "vLLM",
+      "priority": 7,
+      "status": "new"
+    }
+  ],
+  "daily_topics": [
+    {
+      "day": 1,
+      "topic": "AI INFRA 基础概念",
+      "status": "pending"
+    },
+    {
+      "day": 2,
+      "topic": "Docker 容器化",
+      "status": "pending"
+    },
+    {
+      "day": 3,
+      "topic": "vLLM 推理引擎",
+      "status": "pending"
+    },
+    {
+      "day": 4,
+      "topic": "模型部署实战",
+      "status": "pending"
+    },
+    {
+      "day": 5,
+      "topic": "性能优化技巧",
+      "status": "pending"
+    },
+    {
+      "day": 6,
+      "topic": "论文阅读",
+      "status": "pending"
+    },
+    {
+      "day": 7,
+      "topic": "知识整合与复盘",
+      "status": "pending"
+    }
+  ]
+}

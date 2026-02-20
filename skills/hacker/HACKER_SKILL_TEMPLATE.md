@@ -1,19 +1,13 @@
 ---
 name: hacker-skill-template
-description: 黑客技能标准模板 - 包含详细原理、可执行脚本、真实POC、实战步骤。用于创建可实际使用的黑客技能。
+description: 黑客技能详细模板 - 包含深度技术原理、多场景适配、真实可执行脚本、完整实战指南
 ---
 
-# 黑客技能标准模板
+# 黑客技能详细模板
 
-## 模板说明
+## 模板理念
 
-本模板用于创建详细、可使用的黑客技能。每个技能应包含：
-- 详细原理分析
-- 可执行脚本
-- 真实POC/Exploit
-- 实战步骤
-- 环境搭建指南
-- 防御与检测
+**目标：创建可直接用于实战的黑客技能，而非空框架**
 
 ---
 
@@ -22,159 +16,299 @@ description: 黑客技能标准模板 - 包含详细原理、可执行脚本、�
 ```
 skill-name/
 ├── SKILL.md              # 主文档（必需）
-├── scripts/              # 可执行脚本
-│   ├── poc.py           # POC示例
-│   ├── exploit.py       # Exploit示例
-│   └── scanner.py       # 扫描工具
+├── scripts/              # 可执行脚本（必需）
+│   ├── scanner.py        # 检测/扫描脚本
+│   ├── exploit.py        # 利用脚本
+│   ├── env_setup.py      # 环境搭建脚本
+│   └── detector.py       # 检测/防御脚本
 ├── references/          # 参考资料
 │   ├── cve_details.md   # CVE详情
-│   ├── techniques.md    # 技术细节
+│   ├── techniques.md     # 技术细节
+│   ├── bypass_techs.md  # 绕过技术
 │   └── cases.md         # 案例分析
 └── assets/              # 资源文件
     ├── payloads/        # Payload集合
-    └── templates/       # 模板文件
+    └── configs/         # 配置文件
 ```
 
 ---
 
 ## SKILL.md 格式规范
 
-### 1. 简介
-- 漏洞/技术名称
-- 严重程度
-- 影响范围
-- 利用难度
+### 1. 漏洞/技术概述
+```
+## 1. 漏洞/技术概述
 
-### 2. 技术原理（必须详细）
-- 底层机制
-- 数据流分析
-- 内存布局（如果是二进制）
-- 代码流程
+### 1.1 基本信息
+- **漏洞名称**: 
+- **CVE编号**: 
+- **严重程度**: Critical/High/Medium/Low
+- **影响版本**: 
+- **利用难度**: 简单/中等/困难
 
- 漏洞识别### 3.
-- 特征代码
-- Fuzzing方法
-- 检测工具
+### 1.2 漏洞描述
+[详细描述漏洞原理，1-2段]
 
-### 4. 利用技术（必须包含代码）
-- 触发条件
-- 利用步骤
-- 完整POC代码
-- 调试过程
+### 1.3 影响范围
+[影响哪些系统/应用/版本]
+```
 
-### 5. 实战案例
-- 真实CVE分析
-- 环境搭建
-- 复现步骤
-- 注意事项
+### 2. 技术原理（必须详细深入）
+```
+## 2. 技术原理
 
-### 6. 防御与检测
-- 代码层面修复
-- 防护机制
-- 检测规则
-- 安全配置
+### 2.1 底层机制
+[详细的底层原理分析]
 
-### 7. 参考资源
-- 相关CVE
-- 技术文档
-- 开源项目
+### 2.2 代码分析
+```c
+// 示例代码（有实际注释）
+void vulnerable_function(char *input) {
+    char buffer[100];
+    // 漏洞：无边界检查
+    strcpy(buffer, input);
+}
+```
 
----
-
-## 示例：UAF技能内容大纲
-
-### 1. 简介
-- Use-After-Free漏洞
-- 严重程度：Critical
-- 影响：代码执行
-
-### 2. 技术原理
-#### 2.1 堆内存管理
-- malloc/free机制
-- chunk结构
-- bin链表
-
-#### 2.2 UAF漏洞原理
-- 释放后继续使用
-- 内存被重新分配
-- 覆盖敏感数据
+### 2.3 数据流/内存布局
+[使用ASCII图或表格展示]
+```
 
 ### 3. 漏洞识别
-#### 3.1 代码模式
+```
+## 3. 漏洞识别
+
+### 3.1 代码特征
 ```c
-char *p = malloc(100);
-free(p);
-// 漏洞：p未置NULL
-strcpy(p, "attack"); // UAF
+// 危险函数列表
+- strcpy()     // 无边界检查
+- strcat()    // 无边界检查
+- sprintf()   // 格式化字符串
+- gets()      // 极度危险
 ```
 
-#### 3.2 检测工具
-- AddressSanitizer
-- Valgrind
+### 3.2 自动化检测
+[检测脚本使用示例]
+```
 
-### 4. 利用技术
-#### 4.1 堆风水
+### 4. 利用技术（必须包含真实可执行代码）
+```
+## 4. 利用技术
+
+### 4.1 利用步骤
+[详细步骤，每步都有说明]
+
+### 4.2 基础利用
 ```python
-# 堆风水布局示例
-def heap_feng_shui():
-    # 1. 分配多个chunk
-    chunks = [alloc(0x100) for _ in range(10)]
-    # 2. 释放特定chunk
-    free(chunks[5])
-    # 3. 重新分配控制内容
-    payload = b'A' * 0x100 + pack_ptr(shellcode_addr)
-    alloc(0x100, payload)
+#!/usr/bin/env python3
+"""
+功能：xxx利用脚本
+用法：python exploit.py <target>
+"""
+import sys
+
+def exploit(target):
+    # 具体实现
+    pass
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("用法: python exploit.py <target>")
+        sys.exit(1)
+    exploit(sys.argv[1])
 ```
 
-#### 4.2 浏览器UAF利用
-```javascript
-// Chrome V8 UAF POC
-var arr = [1.1, 2.2];
-var fake = {};
-arr[0] = 1.1;
-collect();
-arr[0] = MyExploit; // UAF
+### 4.3 高级利用
+[更复杂场景的利用]
 ```
 
-### 5. 实战案例
-#### 5.1 CVE-2021-XXXXX分析
-- 影响版本
-- 环境搭建（Docker）
-- 复现步骤
-- 调试方法
+### 5. 场景适配（必须详细）
+```
+## 5. 场景适配
 
-### 6. 防御
-- 安全释放（置NULL）
-- 堆保护（Safe Linking）
-- 内存安全语言
+### 5.1 不同操作系统
+| 场景 | 利用差异 | 注意事项 |
+|------|----------|----------|
+| Linux | xxx | 需要xxx |
+| Windows | xxx | 需要xxx |
+| macOS | xxx | 需要xxx |
+
+### 5.2 不同权限
+| 权限 | 可用技术 | 限制 |
+|------|----------|------|
+| 普通用户 | xxx | 无法xxx |
+| ROOT | xxx | 无限制 |
+
+### 5.3 不同网络环境
+| 环境 | 利用方式 | 示例 |
+|------|----------|------|
+| 内网 | 直接连接 | 192.168.1.x |
+| 外网 | 反弹Shell | 公网IP |
+| 隔离网络 | 定时任务 | 无外网 |
+
+### 5.4 不同目标类型
+| 目标 | 攻击差异 |
+|------|----------|
+| Web应用 | xxx |
+| 二进制程序 | xxx |
+| 数据库 | xxx |
+```
+
+### 6. 绕过技术
+```
+## 6. 绕过技术
+
+### 6.1 WAF绕过
+| WAF类型 | 绕过技术 | 示例 |
+|---------|----------|------|
+| Cloudflare | xxx | xxx |
+| ModSecurity | xxx | xxx |
+
+### 6.2 防护机制绕过
+| 机制 | 绕过方法 |
+|------|----------|
+| ASLR | xxx |
+| DEP | xxx |
+| Canary | xxx |
+```
+
+### 7. 防御与检测
+```
+## 7. 防御与检测
+
+### 7.1 代码修复
+```c
+// 修复示例
+void safe_function(char *input) {
+    char buffer[100];
+    // 修复：使用安全函数
+    strncpy(buffer, input, sizeof(buffer) - 1);
+    buffer[sizeof(buffer) - 1] = '\0';
+}
+```
+
+### 7.2 防御规则
+[检测规则示例]
+
+### 7.3 应急响应
+[发现被攻击后的处理流程]
+```
+
+### 8. 实战案例
+```
+## 8. 实战案例
+
+### 8.1 CVE-XXXX-XXXXX分析
+- **影响版本**: xxx
+- **环境搭建**: [Docker/配置]
+- **复现步骤**: [详细步骤]
+- **利用过程**: [截图/日志]
+```
+
+### 9. 参考资源
+```
+## 9. 参考资源
+
+- [漏洞公告]
+- [技术分析]
+- [相关工具]
+- [相关CVE]
+```
 
 ---
 
-## 关键要求
+## 脚本规范
 
-### ✅ 必须包含
-1. **可运行代码** - 至少一个可执行的POC
-2. **详细原理** - 能让人理解底层机制
-3. **环境说明** - 如何搭建测试环境
-4. **防御方案** - 如何防护和检测
+### 必需脚本模板
 
-### ❌ 避免
-1. 仅列出工具名称
-2. 无代码的原理描述
-3. 缺少实际应用的场景
-4. 无参考价值的空框架
+#### scanner.py
+```python
+#!/usr/bin/env python3
+"""
+漏洞扫描脚本
+功能：检测目标是否存在xxx漏洞
+用法：python scanner.py <target>
+"""
+
+import sys
+import argparse
+
+def scan(target):
+    """扫描逻辑"""
+    pass
+
+def main():
+    parser = argparse.ArgumentParser(description='xxx漏洞扫描器')
+    parser.add_argument('target', help='目标地址')
+    parser.add_argument('-p', '--port', default=80, help='端口')
+    args = parser.parse_args()
+    
+    result = scan(f"{args.target}:{args.port}")
+    if result:
+        print(f"[+] 发现漏洞: {result}")
+    else:
+        print("[-] 未发现漏洞")
+
+if __name__ == "__main__":
+    main()
+```
+
+#### exploit.py
+```python
+#!/usr/bin/env python3
+"""
+漏洞利用脚本
+功能：利用xxx漏洞获取shell
+用法：python exploit.py <target> <port>
+"""
+
+import sys
+import socket
+
+def exploit(target, port):
+    """利用逻辑"""
+    pass
+
+if __name__ == "__main__":
+    if len(sys.argv) < 3:
+        print(f"用法: {sys.argv[0]} <target> <port>")
+        sys.exit(1)
+    exploit(sys.argv[1], int(sys.argv[2]))
+```
+
+---
+
+## 质量检查清单
+
+### ✅ 必须满足
+- [ ] 至少包含1个可运行脚本
+- [ ] 技术原理详细到可理解
+- [ ] 覆盖3种以上场景
+- [ ] 包含防御/检测方案
+- [ ] 有实际案例或CVE引用
+
+### ✅ 场景覆盖
+- [ ] 不同OS（Windows/Linux/macOS）
+- [ ] 不同权限（ROOT/普通用户）
+- [ ] 不同网络（内网/外网/隔离）
+- [ ] 不同目标类型（Web/二进制/服务）
+
+### ✅ 代码质量
+- [ ] 脚本可运行
+- [ ] 有错误处理
+- [ ] 有使用说明
+- [ ] 有参数说明
 
 ---
 
 ## 创建流程
 
-1. 理解技术细节
-2. 搜索真实CVE/POC
-3. 编写可执行脚本
-4. 整理参考资料
-5. 测试验证
-6. 完善文档
+1. **深度研究** → 搜索CVE、论文、真实案例
+2. **场景分析** → 梳理不同环境下的差异
+3. **代码实现** → 编写可执行脚本
+4. **测试验证** → 本地测试通过
+5. **文档完善** → 按模板格式整理
 
 ---
 
-*目标：创建可实际用于实战的黑客技能*
+*目标：创建可直接用于实战的黑客技能*

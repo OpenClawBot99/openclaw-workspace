@@ -13,7 +13,7 @@ import json
 import os
 import sys
 import shutil
-import psutil
+import subprocess
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Dict, List, Optional
@@ -108,32 +108,58 @@ class EnhancedTaskManager:
         print("📊 系统资源检查")
         print("=" * 80)
         
-        # 内存检查
-        memory = psutil.virtual_memory()
-        memory_percent = memory.percent
-        print(f"💾 内存使用: {memory_percent:.1f}% ({memory.used / (1024**3):.2f} / {memory.total / (1024**3):.2f} GB)")
+        # 内存检查 - 使用 Windows wmic 命令
+        try:
+            result = subprocess.run(['wmic', 'OS', 'get', 'TotalVisibleMemorySize,FreePhysicalMemory', '/VALUE'], 
+                                  capture_output=True, text=True, timeout=10)
+            if result.returncode == 0:
+                lines = result.stdout.strip().split('\n')
+                total_mem = 0
+                free_mem = 0
+                for line in lines:
+                    if '=' in line:
+                        key, value = line.split('=', 1)
+                        if 'TotalVisibleMemorySize' in key:
+                            total_mem = int(value) * 1024  # KB to bytes
+                        elif 'FreePhysicalMemory' in key:
+                            free_mem = int(value) * 1024
+                if total_mem > 0:
+                    memory_percent = 100 - (free_mem / total_mem * 100)
+                    memory_used_gb = (total_mem - free_mem) / (1024**3)
+                    memory_total_gb = total_mem / (1024**3)
+                    print(f"💾 内存使用: {memory_percent:.1f}% ({memory_used_gb:.2f} / {memory_total_gb:.2f} GB)")
+                else:
+                    memory_percent = 0
+            else:
+                memory_percent = 0
+        except Exception as e:
+            print(f"⚠️  内存检查失败: {e}")
+            memory_percent = 0
         
         if memory_percent > self.config["memory_threshold_percent"]:
             print(f"⚠️  内存使用超过阈值 {self.config['memory_threshold_percent']}%")
             self._cleanup_memory()
         
-        # 磁盘检查
-        disk = psutil.disk_usage('/')
-        disk_percent = disk.percent
-        print(f"💿 磁盘使用: {disk_percent:.1f}% ({disk.used / (1024**3):.2f} / {disk.total / (1024**3):.2f} GB)")
+        # 磁盘检查 - 使用 shutil
+        try:
+            total, used, free = shutil.disk_usage('/')
+            disk_percent = (used / total) * 100
+            print(f"💿 磁盘使用: {disk_percent:.1f}% ({used / (1024**3):.2f} / {total / (1024**3):.2f} GB)")
+        except Exception as e:
+            print(f"⚠️  磁盘检查失败: {e}")
+            disk_percent = 0
         
         if disk_percent > self.config["disk_threshold_percent"]:
             print(f"⚠️  磁盘使用超过阈值 {self.config['disk_threshold_percent']}%")
             self._cleanup_disk()
         
-        # CPU 检查
-        cpu_percent = psutil.cpu_percent(interval=1)
-        print(f"⚡ CPU 使用: {cpu_percent:.1f}%")
+        # CPU 检查 - 跳过（需要 psutil）
+        print("⚡ CPU 检查: 跳过（需要额外依赖）")
         
         return {
             "memory_percent": memory_percent,
             "disk_percent": disk_percent,
-            "cpu_percent": cpu_percent
+            "cpu_percent": None
         }
     
     def _cleanup_memory(self):

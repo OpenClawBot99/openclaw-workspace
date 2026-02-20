@@ -1,0 +1,14 @@
+{
+  "chain_history": [],
+  "current_task": {
+    "task_id": "system_check",
+    "name": "系统健康检查",
+    "duration_minutes": 5,
+    "priority": 7,
+    "created_at": "2026-02-20T07:25:45.590544",
+    "evolution_level": 1
+  },
+  "evolution_level": 1,
+  "total_cycles": 60,
+  "last_evaluation": null
+}

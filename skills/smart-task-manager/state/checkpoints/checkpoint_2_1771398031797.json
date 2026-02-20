@@ -1,0 +1,8 @@
+{
+  "task_id": 2,
+  "task_name": "配置 GH CLI",
+  "progress": 30,
+  "status": "in_progress",
+  "timestamp": "2026-02-18T07:00:31.797Z",
+  "note": "每小时自动检查点"
+}

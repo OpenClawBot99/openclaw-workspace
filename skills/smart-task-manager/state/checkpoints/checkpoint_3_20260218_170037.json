@@ -1,0 +1,8 @@
+{
+  "task_id": 3,
+  "task_name": "开发 survival-instinct",
+  "progress": 0,
+  "status": "pending",
+  "timestamp": "2026-02-18T17:00:37.617343",
+  "note": "每小时自动检查点"
+}

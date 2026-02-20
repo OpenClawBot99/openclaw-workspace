@@ -64,6 +64,10 @@
     "agentarxiv": {
       "version": "1.0.9",
       "installedAt": 1771133305438
+    },
+    "aws-infra": {
+      "version": "1.0.0",
+      "installedAt": 1771395432283
     }
   }
 }

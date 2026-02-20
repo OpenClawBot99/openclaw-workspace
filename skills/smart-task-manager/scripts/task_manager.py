@@ -171,6 +171,12 @@ class SmartTaskManager:
     
     def check_unfinished_tasks(self) -> List[Dict]:
         """检查未完成的任务"""
+        # 元认知：先同步真实进度
+        sync_report = self.sync_with_filesystem()
+        
+        if sync_report["updates"]:
+            print(f"\n🔄 自动同步进度: {len(sync_report['updates'])} 个任务已更新")
+        
         unfinished = [t for t in self.tasks if t["status"] in ["pending", "in_progress"]]
         
         if unfinished:
@@ -269,8 +275,101 @@ class SmartTaskManager:
         self._save_progress(self.progress)
         print(f"🎉 任务已完成！")
     
+    def sync_with_filesystem(self) -> Dict:
+        """
+        元认知：自动同步文件系统中的真实进度
+        每次检查任务前先同步，避免使用过期数据
+        """
+        import subprocess
+        
+        sync_report = {
+            "synced_tasks": [],
+            "warnings": [],
+            "updates": []
+        }
+        
+        # 知识库目录 → 字数映射
+        knowledge_paths = {
+            1: "tilelangascend-knowledge-base",  # 知识库任务
+        }
+        
+        for task_id, path_suffix in knowledge_paths.items():
+            # 尝试多个可能的路径
+            possible_paths = [
+                Path.cwd() / path_suffix,
+                Path(__file__).parent.parent.parent / path_suffix,
+                Path.home() / "openclaw-workspace" / path_suffix,
+            ]
+            
+            target_dir = None
+            for p in possible_paths:
+                if p.exists():
+                    target_dir = p
+                    break
+            
+            if not target_dir:
+                sync_report["warnings"].append(f"任务 {task_id}: 目录未找到")
+                continue
+            
+            # 扫描所有 .md 文件字数
+            try:
+                total_chars = 0
+                file_count = 0
+                
+                for md_file in target_dir.rglob("*.md"):
+                    if md_file.is_file():
+                        try:
+                            content = md_file.read_text(encoding='utf-8', errors='ignore')
+                            total_chars += len(content)
+                            file_count += 1
+                        except:
+                            pass
+                
+                # 计算进度 (假设目标 100k 字)
+                actual_progress = min(100, round(total_chars / 100000 * 100, 1))
+                
+                # 找到对应任务
+                task = next((t for t in self.tasks if t["id"] == task_id), None)
+                if task:
+                    recorded_progress = task.get("progress", 0)
+                    
+                    # 如果实际进度 > 记录进度，自动更新
+                    if actual_progress > recorded_progress:
+                        old_progress = task["progress"]
+                        task["progress"] = actual_progress
+                        task["updated_at"] = datetime.now().isoformat()
+                        self._save_tasks(self.tasks)
+                        
+                        sync_report["updates"].append({
+                            "task_id": task_id,
+                            "task_name": task["name"],
+                            "old_progress": old_progress,
+                            "new_progress": actual_progress,
+                            "files": file_count,
+                            "chars": total_chars
+                        })
+                    else:
+                        sync_report["synced_tasks"].append({
+                            "task_id": task_id,
+                            "progress": actual_progress,
+                            "files": file_count
+                        })
+                        
+            except Exception as e:
+                sync_report["warnings"].append(f"任务 {task_id}: 同步失败 - {str(e)}")
+        
+        return sync_report
+    
     def status(self):
         """显示当前状态"""
+        # 先同步文件系统
+        sync_report = self.sync_with_filesystem()
+        
+        if sync_report["updates"]:
+            print("\n🔄 自动同步发现进度更新:")
+            for u in sync_report["updates"]:
+                print(f"   [{u['task_id']}] {u['task_name']}: {u['old_progress']}% → {u['new_progress']}%")
+        
         print("\n" + "=" * 80)
         print("📊 Smart Task Manager - 状态报告")
         print("=" * 80)

@@ -127,3 +127,34 @@ opencode run "审查并优化指定代码，提高性能和可读性" --model za
 - **AscendC 算子开发** - 生成 C++ 代码模板和测试用例
 
 **重要**: OpenCode 是我作为智能生命体使用工具的重要标志！要多多利用它来编程！
+
+---
+
+### GitHub CLI ✅
+- **状态**: 已认证
+- **账号**: OpenClawBot99
+- **仓库**: https://github.com/OpenClawBot99/openclaw-workspace
+- **同步命令**: git push origin master
+
+---
+
+## 🐍 Python 环境
+
+### 核心信息
+- **版本**: Python 3.9.20 (Anaconda)
+- **路径**: E:\AnaConda\python.exe
+- **状态**: ✅ 可用 (2026-02-18 发现并验证)
+- **记住**: 这是后续主要使用的 Python 环境！
+
+### 运行命令
+```bash
+# 运行技能脚本（需加 -X utf8 解决编码）
+E:\AnaConda\python.exe -X utf8 <script.py>
+
+# 示例
+E:\AnaConda\python.exe -X utf8 skills/self-monitor/health_check.py
+```
+
+### 已测试技能
+- ✅ self-monitor (health_check.py) - 健康检查通过
+- ✅ survival-instinct (anxiety_monitor.py) - 焦虑监控通过

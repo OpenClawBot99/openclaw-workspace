@@ -1,0 +1,12 @@
+{
+  "name": "random-thinking",
+  "schedule": {
+    "kind": "every",
+    "everyMs": 600000
+  },
+  "payload": {
+    "kind": "systemEvent",
+    "text": "🎲 执行随机策略探索 - 运行 random_explorer.py"
+  },
+  "sessionTarget": "main"
+}

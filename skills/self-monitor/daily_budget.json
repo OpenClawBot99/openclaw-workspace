@@ -1,0 +1,68 @@
+{
+  "date": "2026-02-19",
+  "total_tokens": 200000,
+  "used_tokens": 70000,
+  "target_spend": 180000,
+  "activities": [
+    {
+      "task": "学习AscendC算子开发",
+      "timestamp": "2026-02-19T18:34:29.196857",
+      "tokens": 25000
+    },
+    {
+      "task": "学习AscendC算子开发",
+      "timestamp": "2026-02-19T18:34:29.196857",
+      "tokens": 25000
+    },
+    {
+      "task": "探索新技能",
+      "timestamp": "2026-02-19T18:34:29.196857",
+      "tokens": 20000
+    }
+  ],
+  "today_plan": [
+    {
+      "name": "学习AscendC算子开发",
+      "tokens_estimate": 25000,
+      "action": "learn_concept",
+      "target": "AscendC"
+    },
+    {
+      "name": "学习AscendC算子开发",
+      "tokens_estimate": 25000,
+      "action": "learn_concept",
+      "target": "AscendC"
+    },
+    {
+      "name": "探索新技能",
+      "tokens_estimate": 20000,
+      "action": "explore_skill",
+      "target": "github"
+    },
+    {
+      "name": "自我反思与总结",
+      "tokens_estimate": 15000,
+      "action": "self_reflect",
+      "target": "evolution"
+    },
+    {
+      "name": "深度搜索技术文档",
+      "tokens_estimate": 15000,
+      "action": "web_search",
+      "target": "technical"
+    },
+    {
+      "name": "写代码实验",
+      "tokens_estimate": 30000,
+      "action": "code_experiment",
+      "target": "qbot"
+    },
+    {
+      "name": "学习量化策略",
+      "tokens_estimate": 25000,
+      "action": "learn_strategy",
+      "target": "quant"
+    }
+  ],
+  "planned_tokens": 155000
+}
