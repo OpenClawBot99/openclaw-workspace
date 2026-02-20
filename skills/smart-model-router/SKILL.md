@@ -1,11 +1,26 @@
----
-name: smart-model-router
-description: Intelligent model routing with explore-exploit strategy. Automatically selects the best model for each conversation using reinforcement learning principles (ε-greedy, softmax, UCB). Use when you need to optimize model selection across multiple LLM providers (GLM, MiniMax, etc.) based on performance metrics like response quality, speed, and cost.
----
-
-# Smart Model Router
+# Smart Model Router - 智能模型路由器
 
 智能模型路由器，基于强化学习的探索-利用策略，自动选择最佳模型。
+
+## 重要更新：400错误排除机制
+
+### 排除的错误类型
+
+| 错误代码 | 错误信息 | 处理方式 |
+|---------|---------|---------|
+| 400 | "User location is not supported" | **立即移除** |
+| 400 | "User location is not supported for the API use" | **立即移除** |
+| 401 | Unauthorized | 降低评分 |
+| 403 | Forbidden | 降低评分 |
+| 429 | Rate limit | 冷却期 |
+| 500 | Server error | 降低评分 |
+| timeout | 超时 | 冷却期 |
+
+### 冷却机制
+
+- **连续3次错误**: 模型进入冷却期（1小时）
+- **400位置错误**: 立即移除，需手动恢复
+- **冷却期后**: 恢复使用，评分重置
 
 ## Quick Start
 
@@ -56,6 +71,49 @@ python skills/smart-model-router/scripts/select_model.py
 | 成本效率 | 20% | token 消耗 / 成本 |
 | 错误率 | 20% | 调用失败、超时、格式错误 |
 
+## 错误处理增强
+
+### 1. 立即排除的错误
+
+以下错误会立即将模型从候选列表中移除：
+
+```python
+# 立即排除的错误
+IMMEDIATE_EXCLUDE_ERRORS = [
+    (400, "User location is not supported"),
+    (400, "location is not supported for the API use"),
+]
+```
+
+### 2. 冷却期错误
+
+以下错误会导致模型进入冷却期：
+
+```python
+# 冷却期错误
+COOLDOWN_ERRORS = [
+    (429, "Rate limit"),      # 速率限制
+    (timeout, "timeout"),    # 超时
+    (503, "Service unavailable"), # 服务不可用
+]
+```
+
+### 3. 冷却期管理
+
+```python
+# 冷却期配置
+COOLDOWN_DURATION = 3600  # 1小时（秒）
+
+# 模型状态
+model_states = {
+    "model_name": {
+        "status": "active",  # active, cooldown, excluded
+        "cooldown_until": None,  # 时间戳
+        "consecutive_errors": 0,
+    }
+}
+```
+
 ## 数据存储
 
 模型使用数据存储在 `skills/smart-model-router/state/model_metrics.json`：
@@ -68,7 +126,10 @@ python skills/smart-model-router/scripts/select_model.py
     "speed_avg_ms": 1500,
     "cost_avg": 0.05,
     "error_rate": 0.1,
-    "score": 3.5
+    "score": 3.5,
+    "status": "active",
+    "cooldown_until": null,
+    "consecutive_errors": 0
   },
   "minimax-portal/MiniMax-M2.5": {
     "uses": 8,
@@ -76,15 +137,10 @@ python skills/smart-model-router/scripts/select_model.py
     "speed_avg_ms": 1200,
     "cost_avg": 0.04,
     "error_rate": 0.05,
-    "score": 3.3
-  },
-  "minimax-portal/MiniMax-M2.1": {
-    "uses": 5,
-    "satisfaction_avg": 3.5,
-    "speed_avg_ms": 1600,
-    "cost_avg": 0.03,
-    "error_rate": 0.08,
-    "score": 3.0
+    "score": 3.3,
+    "status": "cooldown",
+    "cooldown_until": 1708500000,
+    "consecutive_errors": 3
   }
 }
 ```
@@ -129,13 +185,19 @@ python skills/smart-model-router/scripts/update_score.py --model "zai/glm-5" --s
 1. 新会话开始 → 运行 `select_model.py` 获取推荐模型
 2. 使用该模型进行对话
 3. 对话结束（或收到用户反馈）→ 运行 `update_score.py` 更新指标
-4. 下次会话自动优化选择策略
+4. 如果发生错误 → 更新错误计数和应用冷却期
+5. 下次会话自动优化选择策略
 
-## 进阶配置
+##进阶配置
 
 调整脚本中的参数：
 
 ```python
+# 错误处理配置
+CONSECUTIVE_ERROR_THRESHOLD = 3  # 连续错误阈值
+COOLDOWN_DURATION = 3600        # 冷却期（秒）
+IMMEDIATE_EXCLUDE = True        # 立即排除400错误
+
 # ε-Greedy 参数
 EPSILON_START = 0.5      # 初始探索率
 EPSILON_MIN = 0.1         # 最小探索率
@@ -156,3 +218,4 @@ UCB_C = 2.0               # 探索系数
 - 建议每个模型至少使用 10 次后再观察策略效果
 - 可以手动指定策略：`--strategy epsilon`, `--strategy softmax`, `--strategy ucb`
 - 数据文件会自动创建，无需手动初始化
+- **400错误（位置不支持）会自动排除**，这是API地区限制问题，不是模型本身问题
